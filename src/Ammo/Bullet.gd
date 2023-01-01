@@ -21,14 +21,17 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_Area2D_body_entered(body):
+	var is_same_object : bool = self.get_instance_id() == body.get_instance_id()
+	
 	if body.is_in_group("Damageable"):
 		body.take_damage(damage)
 		print("Bullet Damaged : " + body.name)
 		print("Health Remaining : " + body.health as String)
-		# destroy()
-		visible = true
+		destroy()
+	elif body.is_in_group("Bullet") and not is_same_object:
+		print ("Collider with a Bullet")
+		destroy()
 	
-	destroy()
 	
 	pass
 
