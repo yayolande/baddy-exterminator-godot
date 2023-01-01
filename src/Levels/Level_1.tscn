@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Enemies/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/UI/PlayerHealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Levels/UIController.gd" type="Script" id=7]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="UIController" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 7 )
+
+[node name="PlayerHealthBar" parent="UIController" instance=ExtResource( 3 )]
+
+[node name="PlayableEvenvironment" type="Node2D" parent="."]
+
+[node name="Player" parent="PlayableEvenvironment" instance=ExtResource( 2 )]
+position = Vector2( 146, 170 )
+
+[node name="Enemy" parent="PlayableEvenvironment" instance=ExtResource( 1 )]
+position = Vector2( 10555, -108 )
+move_speed = 300.0
+
+[node name="Enemy2" parent="PlayableEvenvironment" instance=ExtResource( 1 )]
+position = Vector2( 933, 525 )
+move_speed = 300.0
+shoot_distance = 500.0
+enemy_type = 1

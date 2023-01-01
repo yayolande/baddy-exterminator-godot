@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/wraper_health_bar.png-5aaf58686c3c776c4bc601b6136ca867.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/health_bar/wraper_health_bar.png"
+dest_files=[ "res://.import/wraper_health_bar.png-5aaf58686c3c776c4bc601b6136ca867.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
