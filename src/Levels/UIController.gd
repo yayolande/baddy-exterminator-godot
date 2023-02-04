@@ -32,6 +32,8 @@ func _ready():
 
 
 
+
+
 func _on_player_health_changed (health: int):
 	health_bar.value = health
 
@@ -60,3 +62,9 @@ func update_health_bar_UI (health: int, max_health: int) -> void:
 	health_bar.max_value = player_max_health
 	health_number.text = "{current_health}/{max_health}".format({"current_health": player_current_health, "max_health": player_max_health})
 	pass
+
+
+func _on_PauseMenu_exit_to_main_menu():
+	print("Quit to Main Menu not implemented yet ! \n Issue with Best Practice for Scene Management.")
+	
+	pass # Replace with function body.

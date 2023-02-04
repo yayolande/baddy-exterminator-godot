@@ -63,8 +63,16 @@ func _process(_delta: float):
 		var _unused = cyle_through_weapons()
 		can_fire = true
 	
+#	if Input.is_action_just_pressed("super_move"):
+#		get_tree().paused = !get_tree().paused
+	
 	pass
 
+func _unhandled_input(event):
+	if event.is_action_pressed("super_power"):
+		self.get_tree().paused = ! self.get_tree().paused
+	
+	pass
 
 
 func _physics_process(_delta: float):

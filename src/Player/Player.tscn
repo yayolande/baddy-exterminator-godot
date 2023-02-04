@@ -11,6 +11,7 @@ extents = Vector2( 50, 50 )
 extents = Vector2( 60, 60 )
 
 [node name="Player" type="KinematicBody2D" groups=["Damageable", "Player"]]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]

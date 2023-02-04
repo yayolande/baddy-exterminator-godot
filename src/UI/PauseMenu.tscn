@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UI/PauseMenu.gd" type="Script" id=1]
+
+[node name="PauseMenu" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0627451, 0.0941176, 0.172549, 0.317647 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VerticalContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 447.0
+margin_top = 232.0
+margin_right = 576.0
+margin_bottom = 368.0
+custom_constants/separation = 17
+
+[node name="PauseLbl" type="Label" parent="CenterContainer/VerticalContainer"]
+margin_right = 129.0
+margin_bottom = 14.0
+text = "Paused"
+align = 1
+valign = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VerticalContainer"]
+margin_top = 31.0
+margin_right = 129.0
+margin_bottom = 35.0
+
+[node name="Control" type="Control" parent="CenterContainer/VerticalContainer"]
+margin_top = 52.0
+margin_right = 129.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="ResumeBtn" type="Button" parent="CenterContainer/VerticalContainer"]
+margin_top = 79.0
+margin_right = 129.0
+margin_bottom = 99.0
+text = "Resume"
+
+[node name="ExitToMainMenuBtn" type="Button" parent="CenterContainer/VerticalContainer"]
+margin_top = 116.0
+margin_right = 129.0
+margin_bottom = 136.0
+text = "Exit To Main Menu"
+
+[connection signal="pressed" from="CenterContainer/VerticalContainer/ResumeBtn" to="." method="_on_ResumeBtn_pressed"]
+[connection signal="pressed" from="CenterContainer/VerticalContainer/ExitToMainMenuBtn" to="." method="_on_ExitToMainMenuBtn_pressed"]
