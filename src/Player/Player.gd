@@ -10,7 +10,9 @@ export(int) var max_health : int = 7
 export(float) var speed : float = 500.0
 export(float) var force : float = 2000.0
 # var bullet : PackedScene = preload ("res://src/Ammo/Bullet.tscn")
-onready var gun_barrel_exit = get_node("Guns/GunBarrelExit")
+export(NodePath) var gun_barrel_exit_path : NodePath
+export(NodePath) var guns_available : NodePath
+#onready var gun_barrel_exit = get_node("Guns/GunBarrelExit")
 var is_player_alive : bool = true
 var direction : Vector2
 
@@ -19,6 +21,9 @@ var weapon : Node2D
 var weapon_clip_size : int 
 var weapon_remaining_bullet : int
 var can_fire : bool = true
+var gun_barrel_exit : Node2D
+var guns : Node2D
+var model : Node2D
 
 
 func _init():
@@ -26,12 +31,16 @@ func _init():
 	is_player_alive = true
 	
 	pass
-
-
+	
+	
 func _ready():
-	weapons.push_front($Guns/Pistol)
-	weapons.push_front($Guns/Rifle)
-	weapons.push_front($Guns/Shotgun)
+	gun_barrel_exit = get_node(gun_barrel_exit_path)
+	guns = get_node(guns_available)		# In a near future, remove $Model/Guns by this variable
+	model = $Model
+	
+	weapons.push_front($Model/Guns/Pistol)
+	weapons.push_front($Model/Guns/Rifle)
+	weapons.push_front($Model/Guns/Shotgun)
 
 	weapon = cyle_through_weapons()
 
@@ -69,8 +78,8 @@ func _process(_delta: float):
 	pass
 
 func _unhandled_input(event):
-	if event.is_action_pressed("super_power"):
-		self.get_tree().paused = ! self.get_tree().paused
+#	if event.is_action_pressed("super_power"):
+#		self.get_tree().paused = ! self.get_tree().paused
 	
 	pass
 
@@ -78,9 +87,13 @@ func _unhandled_input(event):
 func _physics_process(_delta: float):
 	var velocity : Vector2 = direction.normalized() * speed
 	var _unused = move_and_slide(velocity)
+	# NB: All physics calculate use global position
+	# So if the physcis engine is asking for position, it will most likely be a global one
+	# However, in our case it is the 'velocity' that is need. So it is 'reference system' independent
 
 	direction = Vector2.ZERO	# Reset direction after moving object
-	look_at(get_global_mouse_position())
+	model.look_at(get_global_mouse_position())
+	# look_at(get_global_mouse_position())
 	
 	pass
 
@@ -93,12 +106,17 @@ func _physics_process(_delta: float):
 
 
 func fire():
-	var bullet : Node2D = weapon.generate_bullet(rotation)
+	var bullet : Node2D = weapon.generate_bullet(model.rotation)
 
 	bullet.position = gun_barrel_exit.get_global_position()
-	bullet.rotation = rotation
+	bullet.rotation = model.rotation
 
-	get_tree().get_root().add_child(bullet)
+#	get_tree().get_root().add_child(bullet)
+	get_tree().get_root().call_deferred("add_child", bullet)
+	
+#	The way below is better since it is now the responsability of "Weapon" to put the bullet to the right space/node tree.
+#	Furthermore, now the player is not responsable for the 'how' and inner working of the bullet positioning and rotation.
+#	var _bullet : Node2D = weapon.generate_bullet(self.global_rotation, self.global_position)
 
 	return
 

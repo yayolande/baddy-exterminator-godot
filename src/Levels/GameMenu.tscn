@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/UI/GameMenu.gd" type="Script" id=1]
+[ext_resource path="res://src/Levels/GameMenu.gd" type="Script" id=1]
 
 [sub_resource type="Theme" id=1]
 
@@ -8,6 +8,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_editor_description_": "Title Screen for the Game"
+}
 
 [node name="ContainerMenu" type="VBoxContainer" parent="."]
 anchor_left = 0.5

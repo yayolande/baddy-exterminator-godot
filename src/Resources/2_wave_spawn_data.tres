@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://src/Resources/SpawnData.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+interval_spawn = 0.8
+quantity_per_spawn = 2
+max_spawn = 30

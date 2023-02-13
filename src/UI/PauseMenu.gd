@@ -30,5 +30,6 @@ func _on_ResumeBtn_pressed():
 
 func _on_ExitToMainMenuBtn_pressed():
 	emit_signal("exit_to_main_menu")
+	togglePauseMenu()
 	
 	pass # Replace with function body.

@@ -24,7 +24,8 @@ func _ready():
 	var players = get_tree().get_nodes_in_group("Player")
 	player = players[randi() % players.size()]
 	
-	health_bar.value = max_health
+	health_bar.value = health
+	(health_bar as Range).max_value = max_health
 
 	match enemy_type:
 		EnemyType.Creeper:

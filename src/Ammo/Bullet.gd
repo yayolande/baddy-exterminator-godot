@@ -31,6 +31,9 @@ func _on_Area2D_body_entered(body):
 	elif body.is_in_group("Bullet") and not is_same_object:
 		print ("Collider with a Bullet")
 		destroy()
+	elif true and not is_same_object:
+		print("Collided with something")
+		destroy()
 	
 	
 	pass
