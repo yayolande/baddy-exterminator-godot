@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/Levels/GameMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/musics/Clement Panchout - Sweet 70s.wav" type="AudioStream" id=2]
 
 [sub_resource type="Theme" id=1]
 
@@ -44,6 +45,11 @@ margin_bottom = 131.0
 focus_neighbour_bottom = NodePath("../StartGameButton")
 theme = SubResource( 1 )
 text = "Quit"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="ContainerMenu/StartGameButton" to="." method="_on_StartGameButton_pressed"]
 [connection signal="pressed" from="ContainerMenu/SettingsButton" to="." method="_on_SettingsButton_pressed"]

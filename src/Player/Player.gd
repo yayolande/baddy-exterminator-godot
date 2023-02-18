@@ -110,6 +110,11 @@ func fire():
 
 	bullet.position = gun_barrel_exit.get_global_position()
 	bullet.rotation = model.rotation
+	bullet.rotation = model.rotation
+	bullet.rotation = model.rotation
+	bullet.rotation = model.rotation
+	bullet.rotation = model.rotation
+	bullet.rotation = model.rotation
 
 #	get_tree().get_root().add_child(bullet)
 	get_tree().get_root().call_deferred("add_child", bullet)

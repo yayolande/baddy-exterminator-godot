@@ -14,9 +14,12 @@ var ShotgunBullet : PackedScene = preload("res://src/Ammo/ShotgunAreaEffect.tscn
 # var BulletShotgun : PackedScene = preload()
 var Bullet : PackedScene
 var move_bullet : FuncRef
+var shot_sound : AudioStreamPlayer2D
 
 
 func _ready():
+	shot_sound = $ShotSound
+	
 	if ammo == AmmoType.StandardAmmo :
 		Bullet = BulletStandard
 		move_bullet = funcref (self, "move_bullet_standard_ammo")
@@ -35,6 +38,8 @@ func generate_bullet (shot_angle: float) -> Node2D:
 	var bullet = Bullet.instance()
 	bullet.damage = damage
 	move_bullet.call_func(bullet, shot_angle)
+	if shot_sound :
+		shot_sound.play()
 
 	return bullet
 

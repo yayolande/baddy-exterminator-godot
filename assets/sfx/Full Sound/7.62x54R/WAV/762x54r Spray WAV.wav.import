@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/762x54r Spray WAV.wav-ec316ef08e183cdfef7ad6c6a40dc483.sample"
+
+[deps]
+
+source_file="res://assets/sfx/Full Sound/7.62x54R/WAV/762x54r Spray WAV.wav"
+dest_files=[ "res://.import/762x54r Spray WAV.wav-ec316ef08e183cdfef7ad6c6a40dc483.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

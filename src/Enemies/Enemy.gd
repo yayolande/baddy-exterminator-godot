@@ -15,10 +15,14 @@ var enemy_behavior : FuncRef
 var weapon : Node2D
 var player : Node2D
 var can_fire : bool
+var is_dead : bool
+var death_sound : AudioStreamPlayer2D
 
 
 func _ready():
+	death_sound = $DeathSound
 	can_fire = true
+	is_dead = false
 	randomize()
 	
 	var players = get_tree().get_nodes_in_group("Player")
@@ -96,6 +100,9 @@ func fire(direction: Vector2):
 
 
 func take_damage(external_damage: float) -> void:
+	if is_dead:
+		return
+	
 	health -= (external_damage as int)
 
 	if health <= 0:
@@ -108,7 +115,14 @@ func take_damage(external_damage: float) -> void:
 
 
 func die() -> void:
-	queue_free()
+	# var _unused = self.connect("finished", death_sound, "_on_die")
+	# set_physics_process(false)
+	is_dead = true
+	self.set_physics_process(false)
+	death_sound.play()
+	yield(death_sound, "finished")
+	print("death sound completed, now ready to delete node from scene")
+	self.queue_free()
 	
 	pass
 
@@ -119,3 +133,4 @@ func die() -> void:
 # 		health -= body.damage
 # 		print (health as String + " === Enemy Has Been Hit")
 # 	pass # Replace with function body.
+
