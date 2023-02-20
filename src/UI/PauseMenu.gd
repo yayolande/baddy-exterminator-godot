@@ -1,5 +1,7 @@
 extends Control
 
+#export(PackedScene) var scene_level_1 : PackedScene
+export(String, FILE, "*.tscn") var scene_level_1_path
 
 signal exit_to_main_menu
 
@@ -29,7 +31,23 @@ func _on_ResumeBtn_pressed():
 
 
 func _on_ExitToMainMenuBtn_pressed():
-	emit_signal("exit_to_main_menu")
 	togglePauseMenu()
+	get_tree().paused = false
+	emit_signal("exit_to_main_menu")
+	get_tree().change_scene("res://src/Levels/GameMenu.tscn")
 	
+	pass # Replace with function body.
+
+
+func _on_RestartBtn_pressed():
+#	get_tree().change_scene_to(scene_level_1)
+#	get_tree().change_scene("res://src/Levels/Level_1.tscn")
+	togglePauseMenu()
+	get_tree().paused = false
+	get_tree().change_scene(scene_level_1_path)
+	pass # Replace with function body.
+
+
+func _on_RetryBtn_pressed():
+	_on_RestartBtn_pressed()
 	pass # Replace with function body.

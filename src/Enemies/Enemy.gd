@@ -8,7 +8,10 @@ export (float) var damage: float = 1.0
 export(float) var move_speed : float = 500.0
 export (float) var shoot_distance : float = 10
 export (EnemyType) var enemy_type : int = EnemyType.Creeper
+export (Resource) var enemy_death_counter : Resource
+export (Resource) var last_enemy_standing_dead : Resource
 
+signal enemy_died()
 onready var gun_barrel_exit = get_node("Guns/GunBarrelExit")
 onready var health_bar : TextureProgress = $HealthBar
 var enemy_behavior : FuncRef
@@ -118,14 +121,32 @@ func die() -> void:
 	# var _unused = self.connect("finished", death_sound, "_on_die")
 	# set_physics_process(false)
 	is_dead = true
+	enemy_death_counter.value = (enemy_death_counter as IntResource).value + 1
 	self.set_physics_process(false)
+	emit_signal("enemy_died")
 	death_sound.play()
 	yield(death_sound, "finished")
 	print("death sound completed, now ready to delete node from scene")
+	
+	if is_last_enemy():
+		last_enemy_standing_dead.value = true
 	self.queue_free()
 	
 	pass
 
+func is_last_enemy():
+	var siblings = get_parent().get_children()
+	var sibling : Node2D
+	var enemy_count : int
+	for n in siblings.size():
+		sibling = siblings[n] as Node2D
+		if sibling.is_in_group("Enemy"):
+			enemy_count = enemy_count + 1
+		if enemy_count > 1:
+			break
+		pass
+		
+	return enemy_count == 1
 
 # func _on_HitBox_body_entered(body: Node):
 # 	if body.is_in_group("Bullet"):

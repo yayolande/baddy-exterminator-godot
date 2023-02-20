@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/kenney_simplespace/PNG/Retina/enemy_E.png" type="Texture" id=1]
 [ext_resource path="res://src/Enemies/Enemy.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://src/Player/Weapon.gd" type="Script" id=4]
 [ext_resource path="res://assets/sfx/death_sound.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/sfx/Full Sound/5.56/WAV/556 Single WAV.wav" type="AudioStream" id=6]
+[ext_resource path="res://src/Resources/EnemyDeathCounter.tres" type="Resource" id=7]
+[ext_resource path="res://src/Resources/EnemyLastStandingDead.tres" type="Resource" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 50, 50 )
@@ -15,6 +17,10 @@ extents = Vector2( 50, 50 )
 
 [node name="Enemy" type="KinematicBody2D" groups=["Damageable", "Enemy"]]
 script = ExtResource( 2 )
+health = 3
+max_health = 3
+enemy_death_counter = ExtResource( 7 )
+last_enemy_standing_dead = ExtResource( 8 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

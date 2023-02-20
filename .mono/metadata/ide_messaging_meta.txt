@@ -1,2 +1,0 @@
-﻿36675
-/home/reich/.local/lib/Godot_v3.5.1-stable_mono_x11_64/Godot_v3.5.1-stable_mono_x11.64

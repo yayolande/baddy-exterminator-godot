@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "IntResource",
+"language": "GDScript",
+"path": "res://src/Resources/IntResource.gd"
+}, {
+"base": "Resource",
 "class": "SpawnData",
 "language": "GDScript",
 "path": "res://src/Resources/SpawnData.gd"
 } ]
 _global_script_class_icons={
+"IntResource": "",
 "SpawnData": ""
 }
 

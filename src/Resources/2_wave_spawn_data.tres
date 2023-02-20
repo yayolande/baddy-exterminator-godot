@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource( 1 )
-interval_spawn = 0.8
-quantity_per_spawn = 2
+interval_spawn = 1.0
+quantity_per_spawn = 1
 max_spawn = 30

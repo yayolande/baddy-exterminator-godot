@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,10 @@
 [ext_resource path="res://assets/player_rect_shooter_top_down_larger.png" type="Texture" id=5]
 [ext_resource path="res://src/Resources/2_wave_spawn_data.tres" type="Resource" id=6]
 [ext_resource path="res://assets/musics/Clement Panchout _ Revenge.wav" type="AudioStream" id=7]
+[ext_resource path="res://src/Resources/EnemyWaveCounter.tres" type="Resource" id=8]
+[ext_resource path="res://src/Resources/EnemyMaxWaveCounter.tres" type="Resource" id=9]
+[ext_resource path="res://src/Levels/Level_1.gd" type="Script" id=10]
+[ext_resource path="res://src/Resources/EnemyLastStandingDead.tres" type="Resource" id=11]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -38,13 +42,14 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 } ]
 0/z_index = 0
 
-[node name="Node2D" type="Node2D"]
+[node name="World" type="Node2D"]
+script = ExtResource( 10 )
 
 [node name="Background" type="ColorRect" parent="."]
-margin_left = -1025.0
-margin_top = -1379.0
-margin_right = 3975.0
-margin_bottom = 1621.0
+margin_left = -1484.0
+margin_top = -1737.0
+margin_right = 4786.0
+margin_bottom = 1984.0
 color = Color( 0.286275, 0.266667, 0.368627, 0.666667 )
 
 [node name="Walls" type="TileMap" parent="."]
@@ -71,9 +76,12 @@ script = ExtResource( 3 )
 spawn_data = [ ExtResource( 4 ), ExtResource( 6 ) ]
 item_to_spawn = ExtResource( 1 )
 environment_to_spawn_to = NodePath("..")
+wave_counter = ExtResource( 8 )
+max_wave_counter = ExtResource( 9 )
+last_enemy_standing_dead = ExtResource( 11 )
 
 [node name="Position2D" type="Position2D" parent="PlayableEvenvironment/SpawnPoint"]
-position = Vector2( 3022, -668 )
+position = Vector2( 3023, -668 )
 __meta__ = {
 "_gizmo_extents_": 50.0
 }
@@ -88,3 +96,6 @@ __meta__ = {
 stream = ExtResource( 7 )
 volume_db = -10.0
 autoplay = true
+
+[connection signal="player_died" from="PlayableEvenvironment/Player" to="." method="_on_Player_player_died"]
+[connection signal="wave_set_completed" from="PlayableEvenvironment/SpawnPoint" to="." method="_on_SpawnPoint_wave_set_completed"]

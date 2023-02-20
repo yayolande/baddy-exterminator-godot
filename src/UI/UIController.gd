@@ -1,10 +1,20 @@
 extends Control
 
 
+export(Resource) var enemy_counter : Resource
+export(Resource) var wave_counter : Resource
+export(Resource) var max_wave_count : Resource
 #onready var player_health_bar = $PlayerHealthBar
-onready var health_bar : TextureProgress = $PlayerHealthBar/HealthBar
-onready var health_number : Label = $PlayerHealthBar/HealthNumber
+#onready var health_bar : TextureProgress = $PlayerHealthBar/HealthBar
+onready var health_bar : TextureProgress = $Control/PlayerHealthBar/HealthBar
+onready var health_number : Label = $Control/PlayerHealthBar/HealthNumber
+onready var score : Label = $Control/Score
+onready var wave_count : Label = $Control/WageCount
 var player : Node2D
+
+var internal_enemy_counter : int = 0
+var internal_wave_counter : int = 0
+var internal_max_wave_count : int = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -31,6 +41,23 @@ func _ready():
 	pass # Replace with function body.
 
 
+
+# This way of handling UI update is very bad. Better solution was using 'signal'
+# However, due to the architeccture I choose, I am stuck with this method to be able to complete the project in due time
+func _physics_process(_delta: float) -> void:
+	if enemy_counter.value != internal_enemy_counter:
+		internal_enemy_counter = enemy_counter.value
+		
+		score.text = "Score : {count}".format({"count": internal_enemy_counter})
+		pass
+	if wave_counter.value != internal_wave_counter:
+		internal_wave_counter = wave_counter.value
+		internal_max_wave_count = max_wave_count.value
+		
+		wave_count.text = "Wave : {count} / {max_count}".format({"count": internal_wave_counter, "max_count": internal_max_wave_count})
+		pass
+	
+	return
 
 
 
